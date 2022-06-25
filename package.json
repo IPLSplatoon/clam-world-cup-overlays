@@ -1,0 +1,105 @@
+{
+    "name": "clam-world-cup-overlays",
+    "version": "0.1.0",
+    "description": "Broadcast overlays for Inkling Performance Labs' English language broadcast of the Clam World Cup.",
+    "author": {
+        "name": "inkfarer",
+        "email": "inkfarer@inkfarer.com",
+        "url": "https://inkfarer.com"
+    },
+    "files": [
+        "dashboard",
+        "src/extension"
+    ],
+    "scripts": {
+        "build": "cross-env NODE_ENV=production webpack",
+        "build:clean": "npm run clean && npm run build",
+        "build:dev": "webpack",
+        "clean": "trash node_modules/.cache && trash dashboard && trash graphics",
+        "start": "node ../..",
+        "watch": "webpack -w",
+        "lint": "eslint --ext .js,.vue,.ts ./src",
+        "fix": "eslint ./src --fix",
+        "schema-types": "nodecg schema-types"
+    },
+    "nodecg": {
+        "compatibleRange": "^1.7.0",
+        "mount": [
+            {
+                "directory": "assets",
+                "endpoint": "assets"
+            }
+        ],
+        "graphics": [
+            {
+                "file": "gameplay.html",
+                "width": 1920,
+                "height": 1080
+            },
+            {
+                "file": "rosterDisplay.html",
+                "width": 1920,
+                "height": 1080
+            },
+            {
+                "file": "stageDisplay.html",
+                "width": 1920,
+                "height": 1080
+            },
+            {
+                "file": "intermission.html",
+                "width": 1920,
+                "height": 1080
+            },
+            {
+                "file": "lowerThird.html",
+                "width": 1920,
+                "height": 1080
+            }
+        ]
+    },
+    "repository": "https://github.com/nodecg/nodecg.git",
+    "devDependencies": {
+        "@fortawesome/fontawesome-svg-core": "6.1.1",
+        "@fortawesome/free-brands-svg-icons": "^6.1.1",
+        "@fortawesome/free-solid-svg-icons": "6.1.1",
+        "@fortawesome/vue-fontawesome": "^3.0.0-5",
+        "@iplsplatoon/vue-components": "2.6.0",
+        "@types/lodash": "^4.14.171",
+        "@types/luxon": "^1.27.1",
+        "@types/node": "^15.14.9",
+        "@types/webpack": "^5.28.0",
+        "@typescript-eslint/eslint-plugin": "^4.26.0",
+        "@typescript-eslint/parser": "^4.26.0",
+        "@vitejs/plugin-vue": "^2.3.1",
+        "@vue/compiler-sfc": "^3.2.31",
+        "cross-env": "^7.0.3",
+        "css-loader": "^5.2.7",
+        "eslint": "^7.28.0",
+        "eslint-import-resolver-typescript": "^2.4.0",
+        "eslint-plugin-vue": "^7.19.1",
+        "fork-ts-checker-webpack-plugin": "^7.2.3",
+        "globby": "^11.0.3",
+        "gsap": "npm:@gsap/shockingly@^3.10.2",
+        "html-webpack-plugin": "^5.5.0",
+        "lodash": "^4.17.21",
+        "luxon": "^2.0.1",
+        "nodecg-vue-composable": "^1.1.0",
+        "pinia": "^2.0.11",
+        "sass": "^1.49.10",
+        "sass-loader": "^12.6.0",
+        "semver": "^7.3.5",
+        "style-loader": "^3.3.1",
+        "trash-cli": "^4.0.0",
+        "ts-loader": "^9.2.6",
+        "ts-node": "^10.7.0",
+        "tsconfig-paths-webpack-plugin": "^3.5.2",
+        "typescript": "^4.6.3",
+        "vue": "^3.2.33",
+        "vue-eslint-parser": "^7.11.0",
+        "vue-loader": "^17.0.0",
+        "webpack": "^5.72.0",
+        "webpack-cli": "^4.9.2",
+        "webpack-livereload-plugin": "^3.0.2"
+    }
+}

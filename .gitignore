@@ -1,0 +1,13 @@
+node_modules
+coverage
+bower_components
+
+/dashboard
+/graphics
+/shared
+
+/.idea
+
+result.json
+
+.npmrc
