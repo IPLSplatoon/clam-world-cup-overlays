@@ -4,10 +4,28 @@
             :key="`${teamAName}_${teamBName}`"
             :max-width="1300"
         >
-            <span class="next-up font-numeric">Next up:</span>
-            <span class="team-name">{{ addDots(teamAName) }}</span>
-            <span class="versus">vs</span>
-            <span class="team-name">{{ addDots(teamBName) }}</span>
+            <div class="next-round-content-wrapper">
+                <span class="next-up font-numeric">Next up:</span>
+                <div class="team-name-container">
+                    <div
+                        v-if="!isBlank(teamA?.romanizedName)"
+                        class="secondary-name"
+                    >
+                        {{ addDots(teamA?.romanizedName) }}
+                    </div>
+                    <div class="team-name">{{ addDots(teamA?.name) }}</div>
+                </div>
+                <span class="versus">vs</span>
+                <div class="team-name-container">
+                    <div
+                        v-if="!isBlank(teamB?.romanizedName)"
+                        class="secondary-name"
+                    >
+                        {{ addDots(teamB?.romanizedName) }}
+                    </div>
+                    <div class="team-name">{{ addDots(teamB?.name) }}</div>
+                </div>
+            </div>
         </fitted-content>
     </opacity-swap-transition>
 </template>
@@ -21,6 +39,7 @@ import { computed } from 'vue';
 import OpacitySwapTransition from '../../../components/OpacitySwapTransition.vue';
 import FittedContent from '../../../components/FittedContent.vue';
 import { addDots } from '../../../../shared/helpers/stringHelper';
+import { isBlank } from '@iplsplatoon/vue-components';
 
 export default defineComponent({
     name: 'LowerThirdNextRound',
@@ -31,9 +50,10 @@ export default defineComponent({
         const nextRound = useReplicant<NextRound>('nextRound', DASHBOARD_BUNDLE_NAME);
 
         return {
-            teamAName: computed(() => nextRound.data?.teamA.name),
-            teamBName: computed(() => nextRound.data?.teamB.name),
-            addDots
+            teamA: computed(() => nextRound.data?.teamA),
+            teamB: computed(() => nextRound.data?.teamB),
+            addDots,
+            isBlank
         };
     }
 });
@@ -42,16 +62,31 @@ export default defineComponent({
 <style lang="scss">
 @import '../../../styles/constants';
 
-.next-up {
-    color: $accent-yellow;
-    margin-right: 10px;
-}
+.next-round-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-.team-name {
-    font-size: 40px;
-}
+    .next-up {
+        color: $accent-yellow;
+        margin-right: 10px;
+    }
 
-.versus {
-    margin: 0 9px;
+    .team-name {
+        font-size: 40px;
+    }
+
+    .versus {
+        margin: 0 9px;
+    }
+
+    .team-name-container {
+        text-align: center;
+    }
+
+    .secondary-name {
+        font-size: 22px;
+        margin-bottom: -10px;
+    }
 }
 </style>
