@@ -6,6 +6,14 @@
         <div class="team-roster-content">
             <div class="team-name-wrapper">
                 <fitted-content
+                    v-if="!isBlank(teamData?.romanizedName)"
+                    :max-width="450"
+                    class="team-name secondary-name"
+                    align="center"
+                >
+                    <span>{{ addDots(teamData?.romanizedName) }}</span>
+                </fitted-content>
+                <fitted-content
                     :max-width="450"
                     class="team-name"
                     align="center"
@@ -87,7 +95,7 @@ export default defineComponent({
 
 .team-roster {
     width: 500px;
-    height: 450px;
+    height: 475px;
     margin: 0 45px;
 
     &.position-1 {
@@ -124,15 +132,23 @@ export default defineComponent({
         .team-name-wrapper {
             background-color: rgba(14, 14, 14, 0.8);
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             width: 100%;
             border-bottom: 2px solid $accent-yellow;
+            height: 120px;
         }
 
         .team-name {
             font-size: 50px;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            line-height: 50px;
+
+            &.secondary-name {
+                font-size: 25px;
+                line-height: 25px;
+                margin-bottom: 5px;
+            }
         }
 
         .players {
