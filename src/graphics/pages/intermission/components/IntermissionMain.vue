@@ -87,7 +87,6 @@ export default defineComponent({
 
     .flavor-text {
         font-size: 64px;
-        font-weight: 700;
         height: 90px;
         margin-bottom: 5px;
     }
@@ -101,7 +100,6 @@ export default defineComponent({
 
     span.minutes {
         font-size: 45px;
-        font-weight: 700;
     }
 }
 </style>

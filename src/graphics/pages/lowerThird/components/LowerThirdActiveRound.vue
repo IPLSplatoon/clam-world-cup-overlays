@@ -53,7 +53,6 @@ export default defineComponent({
     .scores {
         margin: 0 12px;
         color: $accent-yellow;
-        font-weight: 700;
         font-size: 42px;
     }
 }

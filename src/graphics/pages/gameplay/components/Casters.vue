@@ -96,7 +96,6 @@ export default defineComponent({
 
     > .casters-header {
         font-size: 28px;
-        font-weight: 500;
         text-align: center;
         width: 100%;
         background-color: $text-background-secondary-alpha;
@@ -118,7 +117,6 @@ export default defineComponent({
             margin: 6px 0;
 
             .caster-name {
-                font-weight: 600;
                 font-size: 30px;
             }
 
@@ -129,7 +127,6 @@ export default defineComponent({
 
             .caster-twitter {
                 font-size: 22px;
-                font-weight: 400;
                 line-height: 22px;
             }
         }

@@ -136,7 +136,6 @@ body {
         > .lower-third-slides {
             position: relative;
             font-size: 36px;
-            font-weight: 500;
             flex-grow: 1;
             display: flex;
             justify-content: center;

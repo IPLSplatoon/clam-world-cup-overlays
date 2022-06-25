@@ -130,7 +130,6 @@ export default defineComponent({
         }
 
         .team-name {
-            font-weight: 500;
             font-size: 50px;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -144,7 +143,6 @@ export default defineComponent({
         }
 
         .team-player {
-            font-weight: 400;
             font-size: 40px;
             height: 55px;
 

@@ -52,7 +52,6 @@ export default defineComponent({
 }
 
 .versus {
-    font-weight: 400;
     margin: 0 9px;
 }
 </style>

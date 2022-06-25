@@ -145,13 +145,11 @@ export default defineComponent({
             > .team-score {
                 text-align: center;
                 font-size: 36px;
-                font-weight: 700;
                 transition: color 500ms;
             }
 
             > .team-name {
                 font-size: 30px;
-                font-weight: 500;
                 height: 42px;
             }
 
@@ -190,7 +188,6 @@ export default defineComponent({
 
         > .flavor-text {
             font-size: 28px;
-            font-weight: 400;
             float: right;
             margin-right: 8px;
         }

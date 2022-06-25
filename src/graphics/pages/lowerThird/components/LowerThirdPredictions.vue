@@ -92,7 +92,6 @@ export default defineComponent({
 
         .team-name {
             font-size: 24px;
-            font-weight: 500;
         }
     }
 
@@ -113,7 +112,6 @@ export default defineComponent({
             position: relative;
             z-index: 2;
             color: white;
-            font-weight: 300;
             font-size: 28px;
 
             &.second-outcome {

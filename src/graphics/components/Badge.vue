@@ -39,6 +39,5 @@ span.badge {
     border-radius: 8px;
     margin-left: 8px;
     display: inline-block;
-    font-weight: 400;
 }
 </style>

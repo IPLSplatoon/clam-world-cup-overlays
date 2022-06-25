@@ -81,7 +81,6 @@ export default defineComponent({
 
     .title {
         font-size: 56px;
-        font-weight: 700;
         height: 72px;
     }
 
@@ -98,12 +97,10 @@ export default defineComponent({
         line-height: 35px;
 
         .team-name {
-            font-weight: 600;
             font-size: 42px;
         }
 
         .round-type {
-            font-weight: 300;
             font-size: 28px;
             font-style: italic;
         }

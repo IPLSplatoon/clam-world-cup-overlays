@@ -214,7 +214,6 @@ export default defineComponent({
                 margin: 8px 12px;
                 font-size: 28px;
                 line-height: 36px;
-                font-weight: 400;
                 overflow-wrap: anywhere;
                 max-height: 140px;
                 overflow: hidden;
