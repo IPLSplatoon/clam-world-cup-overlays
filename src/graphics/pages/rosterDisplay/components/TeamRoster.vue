@@ -142,12 +142,10 @@ export default defineComponent({
 
         .team-name {
             font-size: 50px;
-            line-height: 50px;
 
             &.secondary-name {
                 font-size: 25px;
-                line-height: 25px;
-                margin-bottom: 5px;
+                margin-bottom: -8px;
             }
         }
 
