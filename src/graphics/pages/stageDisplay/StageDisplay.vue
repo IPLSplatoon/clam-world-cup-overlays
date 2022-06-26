@@ -88,7 +88,8 @@ export default defineComponent({
                             y: 0,
                             opacity: 1,
                             ease: 'power2.out',
-                            stagger: 0.08
+                            stagger: 0.08,
+                            delay: 0.1
                         });
 
                 return revealTl;
@@ -98,22 +99,6 @@ export default defineComponent({
         return {
             games,
             shouldDarkenImage: (winner: string) => (winner !== 'none' || activeRound.data?.match.isCompleted),
-            getWinnerName: (winner: string) => {
-                switch (winner) {
-                    case 'alpha':
-                        return {
-                            name: addDots(activeRound.data?.teamA.name),
-                            romanizedName: addDots(activeRound.data?.teamA.name)
-                        };
-                    case 'bravo':
-                        return {
-                            name: addDots(activeRound.data?.teamB.name),
-                            romanizedName: addDots(activeRound.data?.teamB.name)
-                        };
-                    default:
-                        return '';
-                }
-            },
             winnerNames: computed(() => games.value?.map(game => {
                 switch (game.winner) {
                     case 'alpha':

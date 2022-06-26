@@ -33,7 +33,6 @@ import LowerThirdNextRound from './components/LowerThirdNextRound.vue';
 import LowerThirdActiveRound from './components/LowerThirdActiveRound.vue';
 import LowerThirdCasters from './components/LowerThirdCasters.vue';
 import LowerThirdCasterTwitters from './components/LowerThirdCasterTwitters.vue';
-import { CasterBadgesVisible } from 'types/schemas';
 import LowerThirdPredictions from './components/LowerThirdPredictions.vue';
 
 export default defineComponent({
@@ -51,9 +50,7 @@ export default defineComponent({
     setup() {
         const musicShown = useReplicant<MusicShown>('musicShown', DASHBOARD_BUNDLE_NAME);
         const nextRound = useReplicant<NextRound>('nextRound', DASHBOARD_BUNDLE_NAME);
-        const casterBadgesVisible = useReplicant<CasterBadgesVisible>('casterBadgesVisible', undefined);
         const predictionStore = useReplicant<PredictionStore>('predictionStore', DASHBOARD_BUNDLE_NAME);
-        const enableLowerThirdCasters = computed(() => !casterBadgesVisible.data ?? true);
         const enableLowerThirdPredictions = computed(() => {
             const currentPrediction = predictionStore.data?.currentPrediction;
             return predictionStore.data?.status?.predictionsEnabled
@@ -65,8 +62,8 @@ export default defineComponent({
             { component: 'LowerThirdMusic', enabled: computed(() => musicShown.data ?? true), duration: 15 },
             { component: 'LowerThirdNextRound', enabled: showNextRound },
             { component: 'LowerThirdActiveRound', enabled: computed(() => !showNextRound.value) },
-            { component: 'LowerThirdCasters', enabled: enableLowerThirdCasters, duration: 20 },
-            { component: 'LowerThirdCasterTwitters', enabled: enableLowerThirdCasters, duration: 20 },
+            { component: 'LowerThirdCasters', duration: 20 },
+            { component: 'LowerThirdCasterTwitters', duration: 20 },
             { component: 'LowerThirdPredictions', enabled: enableLowerThirdPredictions }
         ]);
 

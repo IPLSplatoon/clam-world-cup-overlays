@@ -56,7 +56,6 @@ import { DASHBOARD_BUNDLE_NAME } from '../../../../shared/constants';
 import FittedContent from '../../../components/FittedContent.vue';
 import { addDots } from '../../../../shared/helpers/stringHelper';
 import { isBlank } from '@iplsplatoon/vue-components';
-import { TeamPronounData } from 'types/schemas';
 
 export default defineComponent({
     name: 'TeamRoster',
@@ -75,7 +74,6 @@ export default defineComponent({
     },
 
     setup(props) {
-        const teamPronounData = useReplicant<TeamPronounData>('teamPronounData', undefined);
         const activeRound = useReplicant<ActiveRound>('activeRound', DASHBOARD_BUNDLE_NAME);
         const teamData = computed(() => props.team === 'A' ? activeRound.data?.teamA : activeRound.data?.teamB);
 
@@ -83,8 +81,7 @@ export default defineComponent({
             teamData,
             players: computed(() => teamData.value?.players.slice(0, 5)),
             addDots,
-            isBlank,
-            pronounsVisible: computed(() => props.team === 'A' ? teamPronounData.data?.teamA : teamPronounData.data?.teamB)
+            isBlank
         };
     }
 });
