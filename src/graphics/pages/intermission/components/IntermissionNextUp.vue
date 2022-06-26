@@ -4,17 +4,34 @@
         <div class="separator" />
         <opacity-swap-transition>
             <fitted-content
-                :key="`${teamAName}_${teamBName}`"
+                :key="`${teamA?.name}_${teamB?.name}`"
                 :max-width="850"
                 class="next-team-names"
             >
-                <span class="team-name">{{ teamAName }}</span>
-                vs
-                <span class="team-name">{{ teamBName }}</span>
-                <br>
-                <span class="round-type">{{ roundType }}</span>
+                <div class="team-name-content-wrapper">
+                    <div class="team-name-container">
+                        <div
+                            v-if="!isBlank(teamA?.romanizedName)"
+                            class="secondary-name"
+                        >
+                            {{ teamA?.romanizedName }}
+                        </div>
+                        <div class="team-name">{{ teamA?.name }}</div>
+                    </div>
+                    <span class="versus">vs</span>
+                    <div class="team-name-container">
+                        <div
+                            v-if="!isBlank(teamB?.romanizedName)"
+                            class="secondary-name"
+                        >
+                            {{ teamB?.romanizedName }}
+                        </div>
+                        <div class="team-name">{{ teamB?.name }}</div>
+                    </div>
+                </div>
             </fitted-content>
         </opacity-swap-transition>
+        <span class="round-type">{{ roundType }}</span>
         <div class="next-games">
             <div
                 v-for="(game, index) in nextGames"
@@ -42,6 +59,7 @@ import { DASHBOARD_BUNDLE_NAME } from '../../../../shared/constants';
 import { NextRound } from 'schemas';
 import { computed } from 'vue';
 import { getStageImagePath } from '../../../helpers/imageHelper';
+import { isBlank } from '@iplsplatoon/vue-components';
 
 export default defineComponent({
     name: 'IntermissionNextUp',
@@ -55,15 +73,16 @@ export default defineComponent({
         const nextRound = useReplicant<NextRound>('nextRound', DASHBOARD_BUNDLE_NAME);
 
         return {
-            teamAName: computed(() => nextRound.data?.teamA.name),
-            teamBName: computed(() => nextRound.data?.teamB.name),
+            teamA: computed(() => nextRound.data?.teamA),
+            teamB: computed(() => nextRound.data?.teamB),
             nextGames: computed(() => nextRound.data?.games.slice(0, 3)),
             moreGamesPresent: computed(() => nextRound.data?.games.length > 3),
             roundType: computed(() => {
                 const gameCount = nextRound.data?.games.length;
                 return nextRound.data?.round.type === 'PLAY_ALL' ? `Play all ${gameCount}` : `Best of ${gameCount}`;
             }),
-            getStageImagePath
+            getStageImagePath,
+            isBlank
         };
     }
 });
@@ -78,10 +97,10 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-top: -10px;
 
     .title {
         font-size: 56px;
-        height: 72px;
     }
 
     .separator {
@@ -94,21 +113,41 @@ export default defineComponent({
     .next-team-names {
         margin: 5px 0;
         font-size: 40px;
-        line-height: 35px;
+
+        .team-name-content-wrapper {
+            display: flex;
+            align-items: center;
+            height: 86px;
+        }
+
+        .team-name-container {
+            text-align: center;
+        }
 
         .team-name {
             font-size: 42px;
         }
 
-        .round-type {
-            font-size: 28px;
-            font-style: italic;
+        .secondary-name {
+            font-size: 24px;
+            margin-bottom: -10px;
         }
+
+        .versus {
+            margin: 0 10px;
+            color: $accent-yellow;
+        }
+    }
+
+    .round-type {
+        font-size: 28px;
+        font-style: italic;
     }
 
     .next-games {
         display: flex;
         margin-top: 15px;
+        height: 135px;
 
         .next-game {
             width: 235px;
