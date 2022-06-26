@@ -78,7 +78,7 @@ export default defineComponent({
 }
 
 .intermission-main-content {
-    @include striped-background(rgba(21, 21, 21, 0.99), rgba(14, 14, 14, 0.99));
+    @include striped-background();
     filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
     border-radius: $default-border-radius;
     width: 1000px;

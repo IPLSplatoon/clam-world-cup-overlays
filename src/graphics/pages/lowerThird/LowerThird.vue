@@ -111,7 +111,7 @@ body {
         position: absolute;
         bottom: 0;
         left: 0;
-        @include striped-background(rgba(21, 21, 21, 0.99), rgba(14, 14, 14, 0.99));
+        @include striped-background();
         display: flex;
         align-items: center;
         border-radius: $default-border-radius;

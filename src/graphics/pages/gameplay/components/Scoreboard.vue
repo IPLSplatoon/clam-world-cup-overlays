@@ -172,7 +172,7 @@ export default defineComponent({
         height: 42px;
         border-radius: 0 0 $default-border-radius $default-border-radius;
         filter: drop-shadow(0 -2px 5px rgba(255, 255, 255, 0.35));
-        background-color: $text-background;
+        background-color: $text-background-alpha;
 
         > .scoreboard-tournament-logo {
             position: absolute;

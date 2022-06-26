@@ -95,7 +95,7 @@ export default defineComponent({
         font-size: 28px;
         text-align: center;
         width: 100%;
-        background-color: $text-background;
+        background-color: $text-background-alpha;
         padding: 4px 0;
         border-bottom: 2px solid $accent-yellow;
     }

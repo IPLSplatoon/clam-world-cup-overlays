@@ -127,7 +127,7 @@ export default defineComponent({
         flex-direction: column;
         align-items: center;
         overflow: hidden;
-        @include striped-background(rgba(21, 21, 21, 0.99), rgba(14, 14, 14, 0.99));
+        @include striped-background();
 
         .team-name-wrapper {
             background-color: rgba(14, 14, 14, 0.8);
