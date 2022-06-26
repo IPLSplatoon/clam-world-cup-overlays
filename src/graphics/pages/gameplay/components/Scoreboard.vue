@@ -17,7 +17,15 @@
                             class="team-name"
                             align="right"
                         >
-                            {{ teamAName }}
+                            <div class="team-name-container">
+                                <div
+                                    v-if="!isBlank(teamA?.romanizedName)"
+                                    class="secondary-name"
+                                >
+                                    {{ teamA?.romanizedName }}
+                                </div>
+                                <div class="team-name-text">{{ teamAName }}</div>
+                            </div>
                         </fitted-content>
                     </opacity-swap-transition>
                     <div class="team-score font-numeric">
@@ -37,7 +45,15 @@
                             class="team-name"
                             align="right"
                         >
-                            {{ teamBName }}
+                            <div class="team-name-container">
+                                <div
+                                    v-if="!isBlank(teamB?.romanizedName)"
+                                    class="secondary-name"
+                                >
+                                    {{ teamB?.romanizedName }}
+                                </div>
+                                <div class="team-name-text">{{ teamBName }}</div>
+                            </div>
                         </fitted-content>
                     </opacity-swap-transition>
                     <div class="team-score font-numeric">
@@ -76,6 +92,7 @@ import { DASHBOARD_BUNDLE_NAME } from '../../../../shared/constants';
 import OpacitySwapTransition from '../../../components/OpacitySwapTransition.vue';
 import { addDots } from '../../../../shared/helpers/stringHelper';
 import gsap from 'gsap';
+import { isBlank } from '@iplsplatoon/vue-components';
 
 export default defineComponent({
     name: 'Scoreboard',
@@ -103,7 +120,8 @@ export default defineComponent({
             },
             scoreboardLeave: (elem: HTMLElement, done: gsap.Callback) => {
                 gsap.to(elem, { y: -25, opacity: 0, ease: 'power2.in', onComplete: done });
-            }
+            },
+            isBlank
         };
     }
 });
@@ -116,7 +134,7 @@ export default defineComponent({
     position: absolute;
     top: 30px;
     left: 30px;
-    width: 380px;
+    width: 390px;
     height: 170px;
 
     filter: drop-shadow(-2px 2px 4px $drop-shadow-color);
@@ -125,7 +143,7 @@ export default defineComponent({
         @include striped-background();
         position: relative;
         max-width: 100%;
-        height: 105px;
+        height: 115px;
         padding: 6px 4px 6px 16px;
         margin: 0;
         z-index: -2;
@@ -137,7 +155,7 @@ export default defineComponent({
             display: grid;
             column-gap: 16px;
             grid-template-rows: 1fr 2px 1fr;
-            grid-template-columns: 290px 1fr 1fr;
+            grid-template-columns: 290px 1fr 10px;
             align-items: center;
             position: relative;
             z-index: 2;
@@ -148,9 +166,18 @@ export default defineComponent({
                 transition: color 500ms;
             }
 
-            > .team-name {
+            .team-name-container {
+                text-align: center;
+            }
+
+            .team-name-text {
                 font-size: 30px;
                 height: 42px;
+            }
+
+            .secondary-name {
+                font-size: 15px;
+                margin-bottom: -8px;
             }
 
             > .separator {
@@ -160,9 +187,9 @@ export default defineComponent({
             }
 
             > .team-color {
-                width: 35px;
+                width: 15px;
                 height: 50px;
-                border-radius: $default-border-radius;
+                border-radius: $default-border-radius 0 0 $default-border-radius;
                 transition: background-color 500ms;
             }
         }
