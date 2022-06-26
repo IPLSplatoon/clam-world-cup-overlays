@@ -26,10 +26,16 @@
                     <opacity-swap-transition>
                         <div
                             v-if="game.winner !== 'none'"
-                            :key="getWinnerName(game.winner)"
+                            :key="winnerNames[index].name"
                             class="stage-winner"
                         >
-                            {{ getWinnerName(game.winner) }}
+                            <div class="stage-winner-name">{{ winnerNames[index].name }}</div>
+                            <div
+                                v-if="!isBlank(winnerNames[index].romanizedName)"
+                                class="secondary-name"
+                            >
+                                {{ winnerNames[index].romanizedName }}
+                            </div>
                         </div>
                     </opacity-swap-transition>
                     <div class="covers-content stage-background" />
@@ -55,6 +61,7 @@ import gsap from 'gsap';
 import { getStageImagePath, loadAndCheckIfImageExists } from '../../helpers/imageHelper';
 import { addDots } from '../../../shared/helpers/stringHelper';
 import { bindEntranceToTimelineGenerator } from '../../helpers/obsSourceHelper';
+import { isBlank } from '@iplsplatoon/vue-components';
 
 const STAGE_SHOW_HIDE_ANIMATION_DURATION = 0.35;
 
@@ -94,15 +101,38 @@ export default defineComponent({
             getWinnerName: (winner: string) => {
                 switch (winner) {
                     case 'alpha':
-                        return addDots(activeRound.data?.teamA.name);
+                        return {
+                            name: addDots(activeRound.data?.teamA.name),
+                            romanizedName: addDots(activeRound.data?.teamA.name)
+                        };
                     case 'bravo':
-                        return addDots(activeRound.data?.teamB.name);
+                        return {
+                            name: addDots(activeRound.data?.teamB.name),
+                            romanizedName: addDots(activeRound.data?.teamB.name)
+                        };
                     default:
                         return '';
                 }
             },
+            winnerNames: computed(() => games.value?.map(game => {
+                switch (game.winner) {
+                    case 'alpha':
+                        return {
+                            name: addDots(activeRound.data?.teamA.name),
+                            romanizedName: addDots(activeRound.data?.teamA.romanizedName as string | undefined)
+                        };
+                    case 'bravo':
+                        return {
+                            name: addDots(activeRound.data?.teamB.name),
+                            romanizedName: addDots(activeRound.data?.teamB.romanizedName as string | undefined)
+                        };
+                    default:
+                        return { name: undefined, romanizedName: undefined };
+                }
+            })),
             matchId: computed(() => activeRound.data?.match.id),
             getStageImagePath,
+            isBlank,
 
             async stageEnter(elem: HTMLElement, done: gsap.Callback) {
                 await loadAndCheckIfImageExists(getStageImagePath(elem.dataset.stage));
@@ -212,15 +242,24 @@ export default defineComponent({
                 left: 0;
                 z-index: 2;
                 margin: 8px 12px;
-                font-size: 28px;
-                line-height: 36px;
                 overflow-wrap: anywhere;
-                max-height: 140px;
+                max-height: 340px;
                 overflow: hidden;
                 filter: drop-shadow(0 0 4px rgba(34, 34, 34, 0.75));
 
                 @supports not (overflow-wrap: anywhere) {
                     word-break: break-all;
+                }
+
+                .stage-winner-name {
+                    font-size: 28px;
+                    line-height: 36px;
+                }
+
+                .secondary-name {
+                    font-size: 20px;
+                    line-height: 28px;
+                    opacity: 90%;
                 }
             }
 
